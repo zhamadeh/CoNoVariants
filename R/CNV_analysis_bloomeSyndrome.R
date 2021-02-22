@@ -183,20 +183,17 @@ tandemRepeatsTotal_filtHighPloidy_hmm$itemRgb <-droplevels(tandemRepeatsTotal_fi
 
 
 
+
 tandemRepeatsPerCell_dnacopy$name="niek_dnacopy"
 tandemRepeatsPerCell_hmm$name="niek_hmm"
+tandemRepeatsPerCell=tandemRepeatsPerCell_hmm
+tandemRepeatsTotal_filtHighPloidy=tandemRepeatsTotal_filtHighPloidy_hmm
 
 plotting <- function(tandemRepeatsPerCell,tandemRepeatsTotal_filtHighPloidy){
   
   method = tandemRepeatsPerCell$name[1]
   plotsPath=paste0("Plots/",method,"/")
 
-  
-  
-  ggplot()+geom_density(tandemRepeatsPerCell,mapping=aes(x = TD,color=ID))+
-    theme_bw() +labs(title = "Aneuploidy count/library")+
-    scale_x_log10()+
-    ggsave(paste0(plotsPath,"2.png"))
   
   tandemRepeatsTotal_filtHighPloidy$seqnames <- factor(tandemRepeatsTotal_filtHighPloidy$seqnames,levels = c("chr1" ,"chr2", "chr3" , "chr4" , "chr5" , "chr6" , "chr7",  "chr8" , "chr9" , "chr10" ,
                                                                                                              "chr11" ,"chr12", "chr13" ,"chr14", "chr15", "chr16", "chr17", "chr18", "chr19","chr20" ,"chr21" ,"chr22",  "chrX" , "chrY" ))
@@ -206,12 +203,7 @@ plotting <- function(tandemRepeatsPerCell,tandemRepeatsTotal_filtHighPloidy){
   ggplot(tandemRepeatsPerCell)+geom_density(mapping = aes(x = TD,color=ID,fill=ID),alpha=0.4)+
     theme_classic() +labs(title = "Aneuploidy count/library")+
     scale_x_log10()+ ggsave(paste0(plotsPath,"4.png"))
-  
-  ggplot(tandemRepeatsPerCell)+geom_density(mapping = aes(x = TD,fill=ID),alpha=0.7)+
-    theme_classic() +labs(title = "Aneuploidy count/library")+
-    facet_wrap(~ID)+
-    scale_x_log10()+ ggsave(paste0(plotsPath,"5.png"))
-  
+ 
   ggplot()+geom_density(data = tandemRepeatsTotal_filtHighPloidy,aes(x = width,color=gene),size=1.5)+
     theme_bw() +labs(title = "CNV segment size")+
     scale_x_log10(breaks = c(1e+5,1e+6,1e+7,1e+8)) + 
@@ -231,5 +223,6 @@ plotting <- function(tandemRepeatsPerCell,tandemRepeatsTotal_filtHighPloidy){
 }
 
 plotting(tandemRepeatsPerCell_dnacopy,tandemRepeatsTotal_filtHighPloidy_dnacopy)
+plotting(tandemRepeatsPerCell_hmm,tandemRepeatsTotal_filtHighPloidy_hmm)
 
 
