@@ -310,6 +310,11 @@ haploidTotal_hmm <- filter(tandemRepeatsTotal_filtHighPloidy_hmm,ploidy==1)
 diploidTotal_hmm <- filter(tandemRepeatsTotal_filtHighPloidy_hmm,ploidy==2)
 
 
+
+######################################################################
+              #### PLOTTING ####
+######################################################################
+
 tandemRepeatsPerCell_dnacopy$name="DNA-COPY"
 tandemRepeatsPerCell_edivisive$name="EDIVISIVE"
 tandemRepeatsPerCell_hmm$name="HMM"
@@ -370,6 +375,62 @@ plotting(tandemRepeatsPerCell_dnacopy,tandemRepeatsTotal_filtHighPloidy_dnacopy,
 plotting(tandemRepeatsPerCell_edivisive,tandemRepeatsTotal_filtHighPloidy_edivisive,haploidPerCell_edivisive,diploidPerCell_edivisive,haploidTotal_edivisive,diploidTotal_edivisive)
 plotting(tandemRepeatsPerCell_hmm,tandemRepeatsTotal_filtHighPloidy_hmm,haploidPerCell_hmm,diploidPerCell_hmm,haploidTotal_hmm,diploidTotal_hmm)
 
-haploidPerCell_hmm
+
+######################################################################
+                    #### SAVING TABLES ####
+######################################################################
+
+for (i in c("hmm","edivisive","dnacopy")){
+  for (j in c("tandemRepeatsPerCell","tandemRepeatsTotal_filtHighPloidy","haploidPerCell","diploidPerCell","haploidTotal","diploidTotal")){
+    name <- paste0(j,"_",i)
+    obj <- get(name)
+    write.table(obj,paste0("DataSummary/",toupper(i),"/",name,".txt"),quote = F,col.names = T,row.names = F,sep="\t")
+  }
+}
+
+
+######################################################################
+              ####  EXPLORATORY ANALYSIS  ####
+######################################################################
+metricsfileDir<- "Metrics/"
+
+collectMetrics <- function(metricsfileDir){
+  
+  metrics <- data.frame()
+
+  for (file in list.files(metricsfileDir,full.names = T)){
+    met <- read.table(file,header = T,fill=T,row.names = NULL)
+    if ("Postfiltering_reads_aligned" %in% colnames(met)){
+      met <- met %>% select(Library,Postfiltering_reads_aligned,Mode_GC)
+      met$file = basename(file)
+    }else if ("Reads_aligned_postfiltering" %in% colnames(met)){
+      met <- met %>% select(Library,Reads_aligned_postfiltering,Mode_GC)
+      met$Postfiltering_reads_aligned <- met$Reads_aligned_postfiltering
+      met <- select(met,-c(Reads_aligned_postfiltering))
+      met$file = basename(file)
+    }
+    met$Library=paste0(met$Library,".trimmed.mdup.bam")
+    metrics <- rbind(met,metrics)
+  }
+  
+  return(metrics)
+}
+
+metrics <- collectMetrics("Metrics/")
+
+merge <- merge(metrics,tandemRepeatsPerCell_dnacopy,by.x="Library",by.y="file")
+
+ggplot(merge)+geom_point(aes(Postfiltering_reads_aligned,norm_td),alpha=0.5)+facet_wrap(~ID)
+
+
+merge$Mode_GC<- as.numeric(gsub('%', '', merge$Mode_GC))
+ggplot(merge)+geom_point(aes(Mode_GC,norm_td),alpha=0.5)+facet_wrap(~ID)+
+  theme_classic()+
+  ggsave("Plots/HMM/GC.png")
+ggplot(merge)+geom_point(aes(Postfiltering_reads_aligned,norm_td),alpha=0.5)+
+  facet_wrap(~ID)+
+  theme_classic()+
+  ggsave("Plots/HMM/reads.png")
+
 
 
