@@ -1,12 +1,12 @@
 library(rtracklayer)
 library(tidyverse)
 
-CNV_hmm<- GRangesList(import("SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/method-HMM/binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz"))
+CNV_hmm<- import("SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/method-HMM/binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
 CNV_dnacopy<- import("SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/method-dnacopy//binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
 CNV_edivisive<- import("SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/method-edivisive//binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
 
 
-cnv_hmm <- GRanges(as.data.frame(CNV_hmm))
+cnv_hmm <- as.data.frame(CNV_hmm)
 cnv_dnacopy <- as.data.frame(CNV_dnacopy)
 cnv_edivisive <- as.data.frame(CNV_edivisive)
 
@@ -14,13 +14,29 @@ length(cnv_hmm)
 length(cnv_dnacopy)
 length(cnv_edivisive)
 
-
+cnv_hmm$name<- as.factor(cnv_hmm$name)
 cnv_dnacopy$name<- as.factor(cnv_dnacopy$name)
 cnv_edivisive$name<- as.factor(cnv_edivisive$name)
 cnv_dnacopy$gene = NA
 cnv_edivisive$gene = NA
 
-
+for (row in 1:nrow(cnv_hmm)){
+  ID <- strsplit(strsplit(cnv_hmm$group_name[row],split = " ")[[1]][4],split = "[-_.]")[[1]]
+  
+  if ("blm" %in% tolower(ID) ){
+    if ("recq5" %in% tolower(ID) ||"recql5" %in% tolower(ID) ){
+      id <- "BLM/RECQL5"
+    } else {
+      id <- "BLM"
+    }
+  } else if ("recq5" %in% tolower(ID) ||"recql5" %in% tolower(ID) ){
+    if (! "blm" %in% tolower(ID) ){
+      id <- "RECQL5"
+    }
+  } else {id <- "WT" }
+  
+  cnv_hmm[row,]$gene=id
+}
 for (row in 1:nrow(cnv_dnacopy)){
   ID <- strsplit(strsplit(cnv_dnacopy$group_name[row],split = " ")[[1]][4],split = "[-_.]")[[1]]
   
