@@ -1,6 +1,9 @@
-CNV_hmm<- import("SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/method-HMM/binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
-CNV_dnacopy<- import("SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/method-dnacopy//binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
-CNV_edivisive<- import("SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/method-edivisive//binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
+library(rtracklayer)
+library(tidyverse)
+
+CNV_hmm<- GRangesList(import("SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/method-HMM/binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz"))
+CNV_dnacopy<- import("SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/method-dnacopy//binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
+CNV_edivisive<- import("SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/method-edivisive//binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz")
 
 
 cnv_hmm <- GRanges(as.data.frame(CNV_hmm))
@@ -57,13 +60,13 @@ cnv_hmm <- separate(cnv_hmm,group_name,c("a","b","c","file")," ") %>% select(-c(
 cnv_dnacopy <- separate(cnv_dnacopy,group_name,c("a","b","c","file")," ") %>% select(-c(a,b,c))
 cnv_edivisive <- separate(cnv_edivisive,group_name,c("a","b","c","file")," ") %>% select(-c(a,b,c))
 
-write.table(cnv_hmm,"SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/CNV_hmm_with_gene.txt",quote=F,row.names = F,col.names = T,sep="\t")
-write.table(cnv_dnacopy,"SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/CNV_dnacopy_with_gene.txt",quote=F,row.names = F,col.names = T,sep="\t")
-write.table(cnv_edivisive,"SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/CNV_edivisive_with_gene.txt",quote=F,row.names = F,col.names = T,sep="\t")
+write.table(cnv_hmm,"SERVER-OUTPUT/Output-WTvarWidthRef/BROWSERFILES/CNV_hmm_with_gene.txt",quote=F,row.names = F,col.names = T,sep="\t")
+write.table(cnv_dnacopy,"SERVER-OUTPUT/Output-WTvarWidthRef//BROWSERFILES/CNV_dnacopy_with_gene.txt",quote=F,row.names = F,col.names = T,sep="\t")
+write.table(cnv_edivisive,"SERVER-OUTPUT/Output-WTvarWidthRef/BROWSERFILES/CNV_edivisive_with_gene.txt",quote=F,row.names = F,col.names = T,sep="\t")
 
-cnv_hmm <- read.table("SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/CNV_hmm_with_gene.txt",fill=T,header=T,sep="\t",comment.char="")
-cnv_dnacopy <- read.table("SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/CNV_dnacopy_with_gene.txt",fill=T,header=T,sep="\t",comment.char="")
-cnv_edivisive <- read.table("SERVER-OUTPUT/Output-VarWidth/BROWSERFILES_varWidthRef/CNV_edivisive_with_gene.txt",fill=T,header=T,sep="\t",comment.char="")
+#cnv_hmm <- read.table("SERVER-OUTPUT/Output-WTvarWidthRef/BROWSERFILES_varWidthRef/CNV_hmm_with_gene.txt",fill=T,header=T,sep="\t",comment.char="")
+#cnv_dnacopy <- read.table("SERVER-OUTPUT/Output-WTvarWidthRef/BROWSERFILES_varWidthRef/CNV_dnacopy_with_gene.txt",fill=T,header=T,sep="\t",comment.char="")
+#cnv_edivisive <- read.table("SERVER-OUTPUT/Output-WTvarWidthRefVarWidth/BROWSERFILES_varWidthRef/CNV_edivisive_with_gene.txt",fill=T,header=T,sep="\t",comment.char="")
 
 
 
