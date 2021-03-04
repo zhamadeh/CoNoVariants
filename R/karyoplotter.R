@@ -4,10 +4,11 @@ kp <- plotKaryotype()
 kpPlotDensity(kp, data=regions)
 
 
-hmm <- read.table("DataSummary/HMM/tandemRepeatsTotal_filtHighPloidy_hmm.txt",header=T,fill=T,comment.char="")
+hmm <- read.table("DATA/HMM/TABLES/TD_total_filtHighPloidy.txt",header=T,fill=T,comment.char="")
 HMM <- GRanges(hmm)
 kp <- plotKaryotype()
-kpPlotDensity(kp, data=HMM)
+p <-kpPlotDensity(kp, data=HMM)
+save(file = "dist.png")
 
 kp <- plotKaryotype(plot.type=2, chromosomes = "chr1")
 kpPlotDensity(kp, data=HMM)
