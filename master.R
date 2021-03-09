@@ -14,9 +14,9 @@ suppressMessages(suppressPackageStartupMessages(suppressWarnings(BiocManager::in
 suppressMessages(suppressPackageStartupMessages(suppressWarnings(require(AneuFinder))))
 suppressMessages(suppressPackageStartupMessages(suppressWarnings(require(BSgenome.Hsapiens.UCSC.hg19))))
 
-Aneufinder(inputfolder='../Sequencing_data/BLM-RECQL5-GOOD-BAM/', outputfolder='aneufinder_output_GC_WTvarWidthRef/',
-           numCPU=13, method=c('dnacopy','HMM',"edivisive"),
-           configfile=NULL, reuse.existing.files=TRUE, binsizes=1e5, stepsizes=1e5, variable.width.reference="../Sequencing_data/WT_forCompositeRef/comp.bam", 
+Aneufinder(inputfolder='../Sequencing_data/WT_composite/', outputfolder='aneufinder_output_compWT_only/',
+           numCPU=5, method=c('dnacopy','HMM',"edivisive"),
+           configfile=NULL, reuse.existing.files=TRUE, binsizes=1e5, stepsizes=1e5, #variable.width.reference="../Sequencing_data/WT_forCompositeRef/comp.bam", 
            reads.per.bin=NULL, pairedEndReads=TRUE,remove.duplicate.reads=TRUE, min.mapq=10, 
            use.bamsignals=FALSE, reads.store=FALSE, 
            correction.method="GC", GC.BSgenome = BSgenome.Hsapiens.UCSC.hg19, 
