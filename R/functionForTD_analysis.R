@@ -289,7 +289,7 @@ plotting <- function(plotspath,tandemRepeatsPerCell,tandemRepeatsTotal_filtHighP
   
   ggplot()+geom_density(data = tandemRepeatsTotal_filtHighPloidy,aes(x = width,fill=gene),alpha=0.5)+
     theme_classic()+labs(title = "CNV segment size")+
-    scale_x_log10(limits=c(1e+05,1e+08))+# = c(1e+01,1e+04,1e+5,1e+6,1e+7,1e+8)) + 
+    #scale_x_log10(limits=c(1e+05,1e+08))+# = c(1e+01,1e+04,1e+5,1e+6,1e+7,1e+8)) + 
     ggsave(paste0(plotsPath,"6.png"))
   
   ggplot(tandemRepeatsPerCell,aes(ID,TD))+geom_violin(aes(fill=ID))+
@@ -305,7 +305,9 @@ plotting <- function(plotspath,tandemRepeatsPerCell,tandemRepeatsTotal_filtHighP
     ggsave(paste0(plotsPath,"8.png"))
 }
 
-
+nrow(tandemRepeatsTotal_filtHighPloidy)
+tandemRepeatsTotal_filtHighPloidy_40Mb= filter(tandemRepeatsTotal_filtHighPloidy,width>20000000)
+tandemRepeatsTotal_filtHighPloidy_40Mb_noY= filter(tandemRepeatsTotal_filtHighPloidy,seqnames!="chrY")
 
 
 
