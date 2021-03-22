@@ -1,0 +1,32 @@
+{
+    "id": "3A2C5AB3",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1616434329021.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "expression": "cnvPerCell",
+        "caption": "cnvPerCell",
+        "totalObservations": 452,
+        "displayedObservations": 452,
+        "variables": 9,
+        "cacheKey": "C4837296",
+        "object": "cnvPerCell",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=cnvPerCell&cache_key=C4837296&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": -4294967275,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1616434329021,
+    "read_only": false,
+    "read_only_alternatives": []
+}
