@@ -3,7 +3,7 @@
     "path": "~/Desktop/CoNoVariants/copyNumberVariantAnalysis.R",
     "project_path": "copyNumberVariantAnalysis.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "2441091872",
     "contents": "",
     "dirty": false,
     "created": 1616428627614.0,
@@ -11,15 +11,15 @@
     "relative_order": 1,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "170,0",
-        "scrollLine": "55"
+        "cursorPosition": "162,0",
+        "scrollLine": "53"
     },
-    "folds": "15|126|52|0|\n60|37|155|0|\n",
-    "lastKnownWriteTime": 1616434672,
+    "folds": "21|41|45|1|\n60|53|155|0|\n",
+    "lastKnownWriteTime": 1616439969,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1616434672205,
+    "last_content_update": 1616439969831,
     "read_only": false,
     "read_only_alternatives": []
 }

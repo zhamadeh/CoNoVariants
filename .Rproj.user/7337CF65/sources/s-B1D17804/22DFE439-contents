@@ -58,7 +58,7 @@ assembleTandemDuplicationDF <- function(CNV="Input/binsize_1e+05_stepsize_1e+05_
 # CORE FUNCTION FOR COLLECTING GAINED AND LOST CHROMOSOME SEGMENTS > 20Mb
 
 
-countGainsAndLosses <- function(CNV){
+countGainsAndLosses <- function(CNV,cutoff=30000000){
 
 
 	cnvPerCell<-data.frame()
@@ -114,7 +114,7 @@ countGainsAndLosses <- function(CNV){
 
 
 		## REMOVE SMALL SEGMENTS  AFFTER HAVING  ASSIGNED PLOIDY  STATE
-		tmp=tmp[tmp$width>20000000,]
+		tmp=tmp[tmp$width>cutoff,]
 		ploidyTable <- tmp %>% group_by(name) %>% dplyr::summarize(n(),sum=sum(width))
 
 
@@ -165,7 +165,5 @@ countGainsAndLosses <- function(CNV){
 cnvPerCell=read.table("DataSummary/cnvPerCell.txt",header=T)
 
 cnvPerCellSummary=read.table("DataSummary/cnvPerCellSummary.txt",header=T)
-
-
 
 
