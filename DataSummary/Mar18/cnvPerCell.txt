@@ -1,0 +1,14 @@
+seqnames	start	end	width	name	type	file	ploidy	gene
+chr1	156700001	186900000	30200000	3	gain	na12878-fdu-mnase-single-f5-r1-c6_merged_.trimmed.mdup.bam	2	WT
+chr1	149900001	206200000	56300000	3	gain	na12878-fdu-mnase-single-f5-r2-c1_merged_.trimmed.mdup.bam	2	WT
+chr1	206400001	248500000	42100000	3	gain	na12878-fdu-mnase-single-f5-r2-c1_merged_.trimmed.mdup.bam	2	WT
+chr4	100000001	190000000	90000000	3	gain	na12878-fdu-mnase-single-f5-r2-c1_merged_.trimmed.mdup.bam	2	WT
+chr1	161700001	206200000	44500000	3	gain	na12878-fdu-mnase-single-f6-r6-c6_merged_.trimmed.mdup.bam	2	WT
+chr1	206400001	248500000	42100000	3	gain	na12878-fdu-mnase-single-f6-r6-c6_merged_.trimmed.mdup.bam	2	WT
+chr2	193600001	227400000	33800000	1	loss	na12878-fdu-mnase-single-f5-r4-c4_merged_.trimmed.mdup.bam	2	WT
+chr2	130700001	242100000	111400000	1	loss	na12878-fdu-mnase-single-f5-r4-c7_merged_.trimmed.mdup.bam	2	WT
+chr10	99700001	133700000	34000000	1	loss	na12878-fdu-mnase-single-f6-r5-c4_merged_.trimmed.mdup.bam	2	WT
+chr1	149800001	206200000	56400000	1	loss	na12878-fdu-mnase-single-f5-r2-c4_merged_.trimmed.mdup.bam	2	WT
+chr1	206400001	248500000	42100000	1	loss	na12878-fdu-mnase-single-f5-r2-c4_merged_.trimmed.mdup.bam	2	WT
+chr1	206400001	248500000	42100000	1	loss	na12878-fdu-mnase-single-f6-r6-c1_merged_.trimmed.mdup.bam	2	WT
+chr2	204500001	242100000	37600000	1	loss	na12878-fdu-mnase-single-f5-r1-c4_merged_.trimmed.mdup.bam	2	WT

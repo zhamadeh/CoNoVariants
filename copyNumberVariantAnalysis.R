@@ -11,6 +11,7 @@ library(plyr)
 ######################################################################
 
 ## WRAPPER FUNCTION FOR COLLECTING GAINED AND LOST CHROMOSOME SEGMENTS > 20Mb
+assembleTandemDuplicationDF(CNV="Input/binsize_1e+05_stepsize_1e+05_StrandSeq_CNV-mar18.bed.gz")
 
 
 assembleTandemDuplicationDF <- function(CNV="Input/binsize_1e+05_stepsize_1e+05_StrandSeq_CNV.bed.gz", metricsDir="Metrics/"){
@@ -46,7 +47,7 @@ assembleTandemDuplicationDF <- function(CNV="Input/binsize_1e+05_stepsize_1e+05_
 	}
 
 	## COLLECT METRICS
-	metrics = collectMetrics(metricsDir)
+	#metrics = collectMetrics(metricsDir)
 
 	## RUN CORE FUNCTION
 	countGainsAndLosses(CNV)
@@ -71,7 +72,7 @@ countGainsAndLosses <- function(CNV,cutoff=30000000){
 		## ASSIGN GENOTYPE BASED OFF FILE NAME
 		ID <- strsplit(strsplit(CNV[i]@listData[[1]]@metadata$trackLine@description,split = " ")[[1]][4],split = "[-_.]")[[1]]
 		file=strsplit(CNV[i]@listData[[1]]@metadata$trackLine@description,split = " ")[[1]][4]
-		date=as.Date(metrics[metrics$Library==file,]$date)
+		#date=as.Date(metrics[metrics$Library==file,]$date)
 
 
 		message("Reading file: ",file," ... ",round((i/length(CNV))*100,2),"%")
@@ -138,8 +139,9 @@ countGainsAndLosses <- function(CNV,cutoff=30000000){
 
 
 		#SUMMARY STATS
-		row <- data.frame(ID=id,ploidy=ploidy,gainSeg=totalGainSeg,totalGain=totalGain,lossSeg=totalLossSeg,totalLoss=totalLoss,file=file,date=date)
+		row <- data.frame(ID=id,ploidy=ploidy,gainSeg=totalGainSeg,totalGain=totalGain,lossSeg=totalLossSeg,totalLoss=totalLoss,file=file)
 		cnvPerCellSummary <- rbind(row,cnvPerCellSummary)
+
 
 		#SUMMARIZE INDIVIDUAL EVENTS
 		df = tmp %>% select(c(seqnames,start,end,width,name,type))
